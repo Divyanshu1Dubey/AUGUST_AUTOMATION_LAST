@@ -1,0 +1,26 @@
+<!-- templates/organize.html -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Directory Organizer</h2>
+    <form action="{{ url_for('organize') }}" method="POST">
+        <label for="directory">Enter the directory path:</label><br>
+        <input type="text" id="directory" name="directory" placeholder="e.g., C:\\Users\\JohnDoe\\Documents" required><br><br>
+
+        <label for="confirm">Are you sure you want to organize the files in this directory? (yes to proceed)</label><br>
+        <input type="text" id="confirm" name="confirm" placeholder="yes or no" required><br><br>
+
+        <input type="submit" value="Organize">
+    </form>
+
+    {% if success %}
+        <div class="success">
+            <h3>Files Organized Successfully!</h3>
+            <p>There are {{ result['pdfs'] }} PDFs, {{ result['docs'] }} Word documents, {{ result['pptx'] }} PowerPoint presentations, {{ result['videos'] }} video files, {{ result['zips'] }} ZIP files, {{ result['audios'] }} audio files, and {{ result['images'] }} image files.</p>
+        </div>
+    {% elif error %}
+        <div class="error">
+            <p>{{ error }}</p>
+        </div>
+    {% endif %}
+{% endblock %}

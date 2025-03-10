@@ -1,0 +1,28 @@
+<!-- templates/sendmail.html -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Email Automation</h2>
+    <form action="{{ url_for('sendmail') }}" method="POST">
+        <label for="recipient">Recipient Email:</label><br>
+        <input type="email" id="recipient" name="recipient" placeholder="recipient@example.com" required><br><br>
+
+        <label for="subject">Subject:</label><br>
+        <input type="text" id="subject" name="subject" placeholder="Email Subject" required><br><br>
+
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message" rows="5" cols="50" required></textarea><br><br>
+
+        <input type="submit" value="Send Email">
+    </form>
+
+    {% if success %}
+        <div class="success">
+            <p>Email sent successfully!</p>
+        </div>
+    {% elif error %}
+        <div class="error">
+            <p>{{ error }}</p>
+        </div>
+    {% endif %}
+{% endblock %}
